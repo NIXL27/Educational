@@ -3,8 +3,12 @@ package com.fc.dao;
 import com.fc.entity.Role;
 import com.fc.entity.RoleExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
+@Repository
 public interface RoleMapper {
     long countByExample(RoleExample example);
 

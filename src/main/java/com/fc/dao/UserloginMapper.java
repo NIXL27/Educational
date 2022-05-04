@@ -4,8 +4,9 @@ import com.fc.entity.Role;
 import com.fc.entity.Userlogin;
 import com.fc.entity.UserloginExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -31,6 +32,4 @@ public interface UserloginMapper {
     int updateByPrimaryKeySelective(Userlogin record);
 
     int updateByPrimaryKey(Userlogin record);
-
-    Role findPermissions(@Param("username") String username, @Param("password") String password);
 }

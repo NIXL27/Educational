@@ -68,9 +68,6 @@
   <sql id="Base_Column_List">
     userID, userName, password, role
   </sql>
-  <select id="findPermissions" resultType="com.fc.entity.Role">
-    select r.* from role r inner join userlogin u on r.roleID = u.role where u.userName = #{username} and u.password = #{password}
-  </select>
   <select id="selectByExample" parameterType="com.fc.entity.UserloginExample" resultMap="BaseResultMap">
     select
     <if test="distinct">

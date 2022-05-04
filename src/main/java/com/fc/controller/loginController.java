@@ -21,15 +21,18 @@ public class loginController {
     }
 
     @PostMapping("login")
-    public String login(@RequestBody String username, String password) {
-        Role permissions = loginService.login(username, password);
+    public String login(String username, String password) {
 
-        if (permissions.getRolename().equals("admin")) {
-            return "redirect:/admin/showStudent";
-        } else if (permissions.getRolename().equals("teacher")) {
-            return "redirect:/teacher/showCourse";
-        } else if (permissions.getRolename().equals("student")) {
-            return "redirect:/student/showCourse";
+        Role role = loginService.login(username, password);
+
+        if (role != null) {
+            if (role.getRolename().equals("admin")) {
+                return "redirect:/admin/showStudent";
+            } else if (role.getRolename().equals("teacher")) {
+                return "redirect:/teacher/showCourse";
+            } else if (role.getRolename().equals("student")) {
+                return "redirect:/student/showCourse";
+            }
         }
         return "login";
     }
