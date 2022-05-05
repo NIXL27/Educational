@@ -4,7 +4,9 @@ import com.fc.entity.Course;
 import com.fc.entity.CourseExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CourseMapper {
     long countByExample(CourseExample example);
 
@@ -27,4 +29,7 @@ public interface CourseMapper {
     int updateByPrimaryKeySelective(Course record);
 
     int updateByPrimaryKey(Course record);
+
+
+  //  List<Course> findByPageAndCourseId(Integer courseid);
 }

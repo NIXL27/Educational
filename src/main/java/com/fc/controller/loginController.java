@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class loginController {
     @Autowired
@@ -26,6 +28,7 @@ public class loginController {
         Role role = loginService.login(username, password);
 
         if (role != null) {
+//            session.setAttribute("username",username);
             if (role.getRolename().equals("admin")) {
                 return "redirect:/admin/showStudent";
             } else if (role.getRolename().equals("teacher")) {

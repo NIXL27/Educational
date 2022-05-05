@@ -3,7 +3,7 @@ package com.fc.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CollegeExample {
+public class CollegeExample extends Course{
     protected String orderByClause;
 
     protected boolean distinct;
