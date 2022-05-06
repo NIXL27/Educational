@@ -23,7 +23,6 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public Role login(String username, String password) {
 
-        System.out.println(username + ":" + password);
         UserloginExample userloginExample = new UserloginExample();
 
         UserloginExample.Criteria criteria = userloginExample.createCriteria();
@@ -34,8 +33,6 @@ public class LoginServiceImpl implements LoginService {
 
         if (users != null && users.size() != 0) {
             Userlogin user = users.get(0);
-
-            System.out.println(user);
 
             if (user.getPassword().equals(password)) {
                 return roleMapper.selectByPrimaryKey(user.getRole());

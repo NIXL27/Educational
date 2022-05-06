@@ -83,6 +83,21 @@ public class Course {
         this.collegeid = collegeid;
     }
 
+    @Override
+    public String toString() {
+        return "Course{" +
+                "courseid=" + courseid +
+                ", coursename='" + coursename + '\'' +
+                ", teacherid=" + teacherid +
+                ", coursetime='" + coursetime + '\'' +
+                ", classroom='" + classroom + '\'' +
+                ", courseweek=" + courseweek +
+                ", coursetype='" + coursetype + '\'' +
+                ", collegeid=" + collegeid +
+                ", score=" + score +
+                '}';
+    }
+
     public Integer getScore() {
         return score;
     }

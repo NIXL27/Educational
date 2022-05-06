@@ -6,6 +6,12 @@
     <result column="studentID" jdbcType="INTEGER" property="studentid" />
     <result column="mark" jdbcType="INTEGER" property="mark" />
   </resultMap>
+
+<!--  <resultMap id="StudentMap" type="com.fc.entity.Student">-->
+<!--    <result column="userID" jdbcType="INTEGER" property="userid" />-->
+<!--    <result column="userName" jdbcType="INTEGER" property="username" />-->
+<!--  </resultMap>-->
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -67,6 +73,9 @@
   <sql id="Base_Column_List">
     courseID, studentID, mark
   </sql>
+  <select id="selectStudentByCourse" parameterType="java.lang.Integer" resultType="com.fc.entity.Student">
+    select s.* from selectedcourse sd inner join student s on sd.studentID = s.userID where sd.courseID = #{id}
+  </select>
   <select id="selectByExample" parameterType="com.fc.entity.SelectedcourseExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
