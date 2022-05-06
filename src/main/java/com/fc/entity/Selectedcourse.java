@@ -30,4 +30,13 @@ public class Selectedcourse {
     public void setMark(Integer mark) {
         this.mark = mark;
     }
+
+    @Override
+    public String toString() {
+        return "Selectedcourse{" +
+                "courseid=" + courseid +
+                ", studentid=" + studentid +
+                ", mark=" + mark +
+                '}';
+    }
 }
