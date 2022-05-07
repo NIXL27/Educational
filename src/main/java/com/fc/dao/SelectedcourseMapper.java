@@ -4,7 +4,9 @@ import com.fc.entity.Selectedcourse;
 import com.fc.entity.SelectedcourseExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface SelectedcourseMapper {
     long countByExample(SelectedcourseExample example);
 
@@ -19,4 +21,10 @@ public interface SelectedcourseMapper {
     int updateByExampleSelective(@Param("record") Selectedcourse record, @Param("example") SelectedcourseExample example);
 
     int updateByExample(@Param("record") Selectedcourse record, @Param("example") SelectedcourseExample example);
+
+    //连表查询
+    List<Selectedcourse> findStudentByMark(@Param("id") Integer id);
+
+
+
 }

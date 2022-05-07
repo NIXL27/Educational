@@ -6,6 +6,17 @@
     <result column="studentID" jdbcType="INTEGER" property="studentid" />
     <result column="mark" jdbcType="INTEGER" property="mark" />
   </resultMap>
+
+  <select id="findStudentByMark" resultType="com.fc.entity.Selectedcourse" >
+    select * from educationalmanagementsystem.selectedcourse es
+        inner join educationalmanagementsystem.student et on  es.studentID = et.userID
+        inner join educationalmanagementsystem.course ec on es.courseID = ec.courseID
+        where es.mark IS NULL and et.userID = #{id}
+
+  </select>
+
+
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

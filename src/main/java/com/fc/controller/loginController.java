@@ -23,12 +23,12 @@ public class loginController {
     }
 
     @PostMapping("login")
-    public String login(String username, String password) {
+    public String login(String username, String password,HttpSession session) {
 
         Role role = loginService.login(username, password);
 
         if (role != null) {
-//            session.setAttribute("username",username);
+            session.setAttribute("username",username);
             if (role.getRolename().equals("admin")) {
                 return "redirect:/admin/showStudent";
             } else if (role.getRolename().equals("teacher")) {

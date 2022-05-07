@@ -2,6 +2,7 @@ package com.fc.service.impl;
 
 import com.fc.dao.CourseMapper;
 import com.fc.entity.Course;
+import com.fc.entity.Selectedcourse;
 import com.fc.service.CourseService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -22,9 +23,11 @@ public class CourseServiceImpl implements CourseService {
         //开启分页
         PageHelper.startPage(page,pageSize);
 
-//      List<Course> courses = courseMapper.findByPageAndCourseId(null);
+//
 
         List<Course> courses = courseMapper.selectByExample(null);
         return new PageInfo<>(courses);
     }
+
+
 }
