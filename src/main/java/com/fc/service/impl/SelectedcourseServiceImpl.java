@@ -4,14 +4,13 @@ import com.fc.dao.SelectedcourseMapper;
 import com.fc.entity.Selectedcourse;
 import com.fc.entity.SelectedcourseExample;
 import com.fc.service.SelectedcourseService;
-import com.fc.vo.SelectedcourseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class SelectedcourseServiceImpl implements SelectedcourseService {
     @Autowired
-    SelectedcourseMapper selectedcourseMapper;
+    private SelectedcourseMapper selectedcourseMapper;
 
     @Override
     public void update(Integer studentid, Integer courseid, String name, Integer mark) {
