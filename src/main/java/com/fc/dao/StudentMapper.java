@@ -3,6 +3,8 @@ package com.fc.dao;
 import com.fc.entity.Student;
 import com.fc.entity.StudentExample;
 import java.util.List;
+
+import com.fc.vo.StudentVO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -30,5 +32,6 @@ public interface StudentMapper {
 
     int updateByPrimaryKey(Student record);
 
+    List<StudentVO> findAll();
 
 }
