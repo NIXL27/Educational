@@ -21,7 +21,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/educationalmanagementsystem?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimeZone=GTM+8
     username: root
-    password: 123456
+    password: 1020
   mvc:
     view:
       prefix: /WEB-INF/pages/
