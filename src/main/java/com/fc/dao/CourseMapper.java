@@ -29,4 +29,7 @@ public interface CourseMapper {
     int updateByPrimaryKeySelective(Course record);
 
     int updateByPrimaryKey(Course record);
+
+
+  //  List<Course> findByPageAndCourseId(Integer courseid);
 }

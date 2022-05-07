@@ -25,4 +25,10 @@ public interface SelectedcourseMapper {
     int updateByExample(@Param("record") Selectedcourse record, @Param("example") SelectedcourseExample example);
 
     List<Student> selectStudentByCourse(@Param("id") Integer id);
+
+    //连表查询
+    List<Selectedcourse> findStudentByMark(@Param("id") Integer id);
+
+
+
 }

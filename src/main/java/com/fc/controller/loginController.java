@@ -32,7 +32,7 @@ public class loginController {
             session.setAttribute("username", username);
 
             if (role.getRolename().equals("admin")) {
-                return "redirect:admin/showStudent";
+                return "redirect:/admin/showStudent";
             } else if (role.getRolename().equals("teacher")) {
                 return "redirect:/teacher/showCourse";
             } else if (role.getRolename().equals("student")) {

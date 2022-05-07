@@ -7,10 +7,15 @@
     <result column="mark" jdbcType="INTEGER" property="mark" />
   </resultMap>
 
-<!--  <resultMap id="StudentMap" type="com.fc.entity.Student">-->
-<!--    <result column="userID" jdbcType="INTEGER" property="userid" />-->
-<!--    <result column="userName" jdbcType="INTEGER" property="username" />-->
-<!--  </resultMap>-->
+  <select id="findStudentByMark" resultType="com.fc.entity.Selectedcourse" >
+    select * from educationalmanagementsystem.selectedcourse es
+        inner join educationalmanagementsystem.student et on  es.studentID = et.userID
+        inner join educationalmanagementsystem.course ec on es.courseID = ec.courseID
+        where es.mark IS NULL and et.userID = #{id}
+
+  </select>
+
+
 
   <sql id="Example_Where_Clause">
     <where>

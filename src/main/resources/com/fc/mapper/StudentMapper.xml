@@ -9,6 +9,8 @@
     <result column="grade" jdbcType="DATE" property="grade" />
     <result column="collegeID" jdbcType="INTEGER" property="collegeid" />
   </resultMap>
+<!---->
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

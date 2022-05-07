@@ -1,5 +1,10 @@
 package com.fc.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
 public class Selectedcourse {
     private Integer courseid;
 
