@@ -34,4 +34,15 @@ public class SelectedcourseServiceImpl implements SelectedcourseService {
     public List<Selectedcourse> findStudentByMark(Integer id) {
         return selectedcourseMapper.findStudentByMark(id);
     }
+
+    @Override
+    public List<Selectedcourse> findCourseById(Integer id) {
+        SelectedcourseExample selectedcourseExample = new SelectedcourseExample();
+
+        SelectedcourseExample.Criteria criteria = selectedcourseExample.createCriteria();
+
+        criteria.andCourseidEqualTo(id);
+
+        return selectedcourseMapper.selectByExample(selectedcourseExample);
+    }
 }

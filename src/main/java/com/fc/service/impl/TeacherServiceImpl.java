@@ -15,16 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class TeacherControllerImpl implements TeacherService {
+public class TeacherServiceImpl implements TeacherService {
 
     @Autowired
     private TeacherMapper teacherMapper;
 
     @Autowired
     private CourseMapper courseMapper;
-
-    @Autowired
-    private SelectedcourseMapper selectedcourseMapper;
 
     @Autowired
     private StudentMapper studentMapper;
@@ -51,40 +48,6 @@ public class TeacherControllerImpl implements TeacherService {
         return null;
     }
 
-    @Override
-    public List<SelectedcourseVo> findAll(Integer id) {
-
-        SelectedcourseExample selectedcourseExample = new SelectedcourseExample();
-
-        SelectedcourseExample.Criteria criteria = selectedcourseExample.createCriteria();
-
-        criteria.andCourseidEqualTo(id);
-
-        List<Selectedcourse> selectedcourses = selectedcourseMapper.selectByExample(selectedcourseExample);
-
-        List<Student> students = selectedcourseMapper.selectStudentByCourse(id);
-
-        System.out.println(students);
-
-
-        List<SelectedcourseVo> selectedcourseVos = new ArrayList<>();
-
-
-        for (int i = 0; i < selectedcourses.size(); i++) {
-            SelectedcourseVo selectedcourseVo = new SelectedcourseVo();
-
-            selectedcourseVo.setSelected(selectedcourses.get(i));
-            selectedcourseVo.setStudentCustom(students.get(i));
-            selectedcourseVo.setStudentid(students.get(i).getUserid());
-            selectedcourseVo.setOver(selectedcourses.get(i).getMark() != null);
-            selectedcourseVo.setMark(selectedcourses.get(i).getMark());
-            selectedcourseVo.setCourseid(selectedcourses.get(i).getCourseid());
-
-            selectedcourseVos.add(selectedcourseVo);
-        }
-
-        return selectedcourseVos;
-    }
 
     @Override
     public SelectedcourseVo finOne(Integer studentid, Integer courseid) {
@@ -97,5 +60,10 @@ public class TeacherControllerImpl implements TeacherService {
         selectedcourseVo.setCourseid(courseid);
 
         return selectedcourseVo;
+    }
+
+    @Override
+    public List<Teacher> findAll() {
+        return teacherMapper.selectByExample(null);
     }
 }

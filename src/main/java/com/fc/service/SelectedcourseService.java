@@ -8,4 +8,6 @@ public interface SelectedcourseService {
     void update(Integer studentid, Integer courseid, String name, Integer mark);
 
     List<Selectedcourse> findStudentByMark(Integer id);
+
+    List<Selectedcourse> findCourseById(Integer id);
 }

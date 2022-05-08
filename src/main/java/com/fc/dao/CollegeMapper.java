@@ -4,7 +4,9 @@ import com.fc.entity.College;
 import com.fc.entity.CollegeExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CollegeMapper {
     long countByExample(CollegeExample example);
 

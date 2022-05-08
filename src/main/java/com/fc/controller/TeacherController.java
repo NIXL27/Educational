@@ -2,6 +2,7 @@ package com.fc.controller;
 
 import com.fc.entity.Course;
 import com.fc.entity.Selectedcourse;
+import com.fc.service.CourseService;
 import com.fc.service.SelectedcourseService;
 import com.fc.service.TeacherService;
 
@@ -28,6 +29,9 @@ public class TeacherController {
     @Autowired
     private SelectedcourseService selectedcourseService;
 
+    @Autowired
+    private CourseService courseService;
+
     // 显示我的课程
     @GetMapping(value = "showCourse")
     public ModelAndView stuCourseShow(HttpSession session) throws Exception {
@@ -46,7 +50,7 @@ public class TeacherController {
 
     @GetMapping("gradeCourse")
     public ModelAndView gradeCourse(Integer id, ModelAndView mv) {
-        List<SelectedcourseVo> selectedcourseVos = teacherService.findAll(id);
+        List<SelectedcourseVo> selectedcourseVos = courseService.findCourse(id);
 
         System.out.println(selectedcourseVos);
 
