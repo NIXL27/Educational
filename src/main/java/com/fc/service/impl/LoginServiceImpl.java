@@ -44,4 +44,21 @@ public class LoginServiceImpl implements LoginService {
         return null;
 
     }
+
+    @Override
+    public List<Userlogin> findByusername(String username) {
+
+        UserloginExample userloginExample = new UserloginExample();
+
+        UserloginExample.Criteria criteria = userloginExample.createCriteria();
+
+        criteria.andUsernameEqualTo(username);
+
+        return userloginMapper.selectByExample(userloginExample);
+    }
+
+    @Override
+    public void update(Userlogin user) {
+        userloginMapper.updateByPrimaryKeySelective(user);
+    }
 }

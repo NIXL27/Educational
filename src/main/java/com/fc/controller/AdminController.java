@@ -32,6 +32,9 @@ public class AdminController {
     @Autowired
     private SelectedcourseService selectedcourseService;
 
+    @Autowired
+    private LoginService loginService;
+
     // 教师操作
     @RequestMapping("showStudent")
     public ModelAndView showStudent(@RequestParam(value = "page",required = true,defaultValue = "1") Integer page, @RequestParam(value = "pageSize", required = true, defaultValue = "4") Integer pageSize) {
@@ -184,6 +187,53 @@ public class AdminController {
 
         mv.addObject("selectCourseInfo",selectCourseInfo);
         mv.setViewName("admin/selectCourse");
+        return mv;
+    }
+
+
+
+    /*其他操作*/
+
+
+    // 修改密码
+    @GetMapping("passwordRest")
+    public ModelAndView passwordRest(ModelAndView mv) {
+        mv.setViewName("admin/passwordRest");
+        return mv;
+    }
+
+
+    // 普通用户账号密码重置显示
+    @GetMapping("userPasswordRest")
+    public ModelAndView userPasswordRest(ModelAndView mv) {
+        mv.setViewName("admin/userPasswordRest");
+        return mv;
+    }
+
+    // 普通用户账号密码重置操作
+    @PostMapping("userPasswordRest")
+    public ModelAndView userPasswordRest(Userlogin userlogin, ModelAndView mv) {
+
+        String username = userlogin.getUsername();
+        List<Userlogin> users = loginService.findByusername(username);
+
+        if (!users.isEmpty()) {
+
+            Userlogin user = users.get(0);
+
+            if (user.getRole() == 0) {
+                mv.addObject("message","该账户为管理员账户，没法修改");
+                mv.setViewName("error");
+            }else {
+                user.setPassword(userlogin.getPassword());
+                loginService.update(user);
+                mv.setViewName("admin/userPasswordRest");
+            }
+        }else {
+            mv.addObject("message","没找到该用户");
+            mv.setViewName("error");
+        }
+
         return mv;
     }
 

@@ -1,5 +1,8 @@
 package com.fc.entity;
 
+import lombok.Data;
+
+@Data
 public class Userlogin {
     private Integer userid;
 
