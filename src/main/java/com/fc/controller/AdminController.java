@@ -1,5 +1,7 @@
 package com.fc.controller;
 
+import com.fc.entity.Course;
+import com.fc.service.CourseService;
 import com.fc.service.StudentService;
 import com.fc.vo.StudentVO;
 import com.github.pagehelper.PageInfo;
@@ -19,6 +21,10 @@ public class AdminController {
     @Autowired
     private StudentService studentService;
 
+    @Autowired
+    private CourseService courseService;
+
+    // 教师操作
     @RequestMapping("showStudent")
     public ModelAndView showStudent(@RequestParam(value = "page",required = true,defaultValue = "1") Integer page, @RequestParam(value = "pageSize", required = true, defaultValue = "4") Integer pageSize) {
         List<StudentVO> students = studentService.findAllByPage(page, pageSize);
@@ -28,6 +34,20 @@ public class AdminController {
         ModelAndView mv=new ModelAndView();
         mv.addObject("pageInfo",pageInfo);
         mv.setViewName("admin/showStudent");
+
+        return mv;
+
+    }
+
+
+    // 课程操作
+    @RequestMapping("showCourse")
+    public ModelAndView showCourse(@RequestParam(value = "page",required = true,defaultValue = "1") Integer page, @RequestParam(value = "pageSize", required = true, defaultValue = "4") Integer pageSize) {
+        PageInfo<Course> coursePageInfo = courseService.page(page, pageSize);
+
+        ModelAndView mv=new ModelAndView();
+        mv.addObject("CoursePageInfo",coursePageInfo);
+        mv.setViewName("admin/showCourse");
 
         return mv;
 

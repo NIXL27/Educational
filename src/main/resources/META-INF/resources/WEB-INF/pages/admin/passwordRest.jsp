@@ -6,10 +6,10 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- 引入bootstrap -->
-	<link rel="stylesheet" type="text/css" href="/META-INF/resources/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
 	<!-- 引入JQuery  bootstrap.js-->
-	<script src="/META-INF/resources/js/jquery-3.2.1.min.js"></script>
-	<script src="/META-INF/resources/js/bootstrap.min.js"></script>
+	<script src="/js/jquery-3.2.1.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<!-- 顶栏 -->
