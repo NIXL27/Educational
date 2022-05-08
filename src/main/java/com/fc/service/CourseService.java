@@ -21,4 +21,6 @@ public interface CourseService {
     void update(Course course);
 
     void delete(Integer id);
+
+    List<Course> findCourseByKeyword(String findCourseByName, Integer page, Integer pageSize);
 }

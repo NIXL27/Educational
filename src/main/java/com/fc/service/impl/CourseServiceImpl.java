@@ -2,10 +2,7 @@ package com.fc.service.impl;
 
 import com.fc.dao.CourseMapper;
 import com.fc.dao.SelectedcourseMapper;
-import com.fc.entity.Course;
-import com.fc.entity.Selectedcourse;
-import com.fc.entity.SelectedcourseExample;
-import com.fc.entity.Student;
+import com.fc.entity.*;
 import com.fc.service.CourseService;
 import com.fc.vo.SelectedcourseVo;
 import com.github.pagehelper.PageHelper;
@@ -90,6 +87,18 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public void delete(Integer id) {
         courseMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public List<Course> findCourseByKeyword(String findCourseByName, Integer page, Integer pageSize) {
+        CourseExample courseExample = new CourseExample();
+
+        CourseExample.Criteria criteria = courseExample.createCriteria();
+
+        PageHelper.startPage(page, pageSize);
+        criteria.andCoursenameLike("%" + findCourseByName + "%");
+
+        return courseMapper.selectByExample(courseExample);
     }
 
 }

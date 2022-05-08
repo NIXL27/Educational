@@ -1,9 +1,6 @@
 package com.fc.controller;
 
-import com.fc.entity.College;
-import com.fc.entity.Course;
-import com.fc.entity.Selectedcourse;
-import com.fc.entity.Teacher;
+import com.fc.entity.*;
 import com.fc.service.*;
 import com.fc.vo.StudentVO;
 import com.github.pagehelper.PageInfo;
@@ -12,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -162,6 +160,30 @@ public class AdminController {
                 mv.setViewName("redirect:/admin/showCourse");
             }
         }
+        return mv;
+    }
+
+
+    // 课程名保存
+    @RequestMapping("searchCourseName")
+    public void searchCourseName(@RequestBody Student student, HttpSession session) {
+        String username = student.getUsername();
+        session.setAttribute("findCourseByName",username);
+    }
+
+    // 课程搜索
+    @RequestMapping("selectCourse")
+    public ModelAndView selectCourse(@RequestParam(value = "page",required = true,defaultValue = "1")Integer page,
+                                     @RequestParam(value = "pageSize",required = true,defaultValue = "4")Integer pageSize, HttpSession session, ModelAndView mv) {
+
+        String findCourseByName = (String) session.getAttribute("findCourseByName");
+
+        List<Course> courses = courseService.findCourseByKeyword(findCourseByName,page,pageSize);
+
+        PageInfo<Course> selectCourseInfo = new PageInfo<>(courses);
+
+        mv.addObject("selectCourseInfo",selectCourseInfo);
+        mv.setViewName("admin/selectCourse");
         return mv;
     }
 
