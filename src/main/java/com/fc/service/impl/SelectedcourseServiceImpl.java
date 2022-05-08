@@ -1,8 +1,8 @@
 package com.fc.service.impl;
 
-import com.fc.entity.SelectedcourseExample;
 import com.fc.dao.SelectedcourseMapper;
 import com.fc.entity.Selectedcourse;
+import com.fc.entity.SelectedcourseExample;
 import com.fc.service.SelectedcourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
