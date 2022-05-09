@@ -34,4 +34,5 @@ public interface StudentMapper {
 
     List<StudentVO> findAll();
 
+    List<StudentVO> add(Student student);
 }

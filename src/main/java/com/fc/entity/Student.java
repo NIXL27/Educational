@@ -15,10 +15,10 @@ public class Student {
 
     private Integer collegeid;
 
+
     public Integer getUserid() {
         return userid;
     }
-
     public void setUserid(Integer userid) {
         this.userid = userid;
     }
@@ -62,4 +62,7 @@ public class Student {
     public void setCollegeid(Integer collegeid) {
         this.collegeid = collegeid;
     }
+
+
+
 }

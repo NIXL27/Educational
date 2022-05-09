@@ -1,8 +1,10 @@
 package com.fc.entity;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import java.util.ArrayList;
 import java.util.List;
-
+@Mapper
 public class CollegeExample extends Course{
     protected String orderByClause;
 
