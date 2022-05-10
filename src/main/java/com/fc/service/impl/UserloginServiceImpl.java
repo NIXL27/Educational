@@ -1,6 +1,8 @@
 package com.fc.service.impl;
 
+import com.fc.dao.RoleMapper;
 import com.fc.dao.UserloginMapper;
+import com.fc.entity.Role;
 import com.fc.entity.Userlogin;
 import com.fc.entity.UserloginExample;
 import com.fc.service.UserloginService;
@@ -14,16 +16,42 @@ public class UserloginServiceImpl implements UserloginService {
     @Autowired
     private UserloginMapper userloginMapper;
 
+    @Autowired
+    private RoleMapper roleMapper;
+
     @Override
-    public Userlogin findUser(String username) {
+    public Role login(String username, String password) {
 
         UserloginExample userloginExample = new UserloginExample();
+
         UserloginExample.Criteria criteria = userloginExample.createCriteria();
+
         criteria.andUsernameEqualTo(username);
 
-        List<Userlogin> userlogins = userloginMapper.selectByExample(userloginExample);
+        List<Userlogin> users = userloginMapper.selectByExample(userloginExample);
 
-        return userlogins.get(0);
+        if (users != null && users.size() != 0) {
+            Userlogin user = users.get(0);
+
+            if (user.getPassword().equals(password)) {
+                return roleMapper.selectByPrimaryKey(user.getRole());
+            }
+        }
+
+        return null;
+
+    }
+
+    @Override
+    public List<Userlogin> findByusername(String username) {
+
+        UserloginExample userloginExample = new UserloginExample();
+
+        UserloginExample.Criteria criteria = userloginExample.createCriteria();
+
+        criteria.andUsernameEqualTo(username);
+
+        return userloginMapper.selectByExample(userloginExample);
     }
 
     @Override

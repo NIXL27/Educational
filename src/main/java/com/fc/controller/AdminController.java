@@ -33,9 +33,9 @@ public class AdminController {
     private SelectedcourseService selectedcourseService;
 
     @Autowired
-    private LoginService loginService;
+    private UserloginService loginService;
 
-    // 教师操作
+    // 学生操作
     @RequestMapping("showStudent")
     public ModelAndView showStudent(@RequestParam(value = "page",required = true,defaultValue = "1") Integer page, @RequestParam(value = "pageSize", required = true, defaultValue = "4") Integer pageSize) {
         List<StudentVO> students = studentService.findAllByPage(page, pageSize);

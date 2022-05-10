@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class PasswordController {
@@ -20,17 +21,21 @@ public class PasswordController {
 
          String username = (String) session.getAttribute("username");
 
-        Userlogin user = userloginService.findUser(username);
+        List<Userlogin> users = userloginService.findByusername(username);
 
-        if (user.getPassword().equals(oldPassword)){
-            user.setPassword(password1);
+        if (!users.isEmpty()) {
+            Userlogin user = users.get(0);
 
-            userloginService.update(user);
+            if (user.getPassword().equals(oldPassword)){
+                user.setPassword(password1);
 
-            mv.setViewName("redirect:/logout");
-        }else {
-            mv.addObject("message","密码错误");
-            mv.setViewName("error");
+                userloginService.update(user);
+
+                mv.setViewName("redirect:/logout");
+            }else {
+                mv.addObject("message","密码错误");
+                mv.setViewName("error");
+            }
         }
 
         return mv;

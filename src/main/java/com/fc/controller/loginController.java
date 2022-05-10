@@ -1,8 +1,7 @@
 package com.fc.controller;
 
 import com.fc.entity.Role;
-import com.fc.entity.Userlogin;
-import com.fc.service.LoginService;
+import com.fc.service.UserloginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +14,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class loginController {
     @Autowired
-    private LoginService loginService;
+    private UserloginService loginService;
 
     @GetMapping("login")
     public String loginPage() {
@@ -28,7 +27,6 @@ public class loginController {
         Role role = loginService.login(username, password);
 
         if (role != null) {
-
             session.setAttribute("username", username);
 
             if (role.getRolename().equals("admin")) {
@@ -39,6 +37,7 @@ public class loginController {
                 return "redirect:/student/showCourse";
             }
         }
+
         return "login";
     }
 
