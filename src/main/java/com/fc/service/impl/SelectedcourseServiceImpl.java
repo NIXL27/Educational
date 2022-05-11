@@ -30,6 +30,10 @@ public class SelectedcourseServiceImpl implements SelectedcourseService {
 
     }
 
+    @Override
+    public List<Selectedcourse> findStudentByMark(Integer id) {
+        return selectedcourseMapper.findStudentByMark(id);
+    }
 
     @Override
     public List<Selectedcourse> findCourseById(Integer id) {
