@@ -5,6 +5,7 @@ import com.fc.entity.Selectedcourse;
 import com.fc.entity.Student;
 import com.fc.service.CourseService;
 import com.fc.service.SelectedcourseService;
+import com.fc.vo.SelectedcourseVo;
 import com.github.pagehelper.PageInfo;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.security.auth.Subject;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("student")
@@ -35,27 +39,43 @@ public class StudentController {
 
             mv.addObject("CoursePageInfo",CoursePageInfo);
 
-//
-
             mv.setViewName("student/showCourse");
 
             return mv;
     }
-    @GetMapping("selectedCourse")
+
+    // 已选课程
+    @RequestMapping("selectedCourse")
     public ModelAndView selectedCourse(ModelAndView mv,
                                        HttpSession session
                                        ) {
 
-        Selectedcourse username = (Selectedcourse) session.getAttribute("username");
+        String username = (String) session.getAttribute("username");
 
-        Integer id = username.getStudentid();
+        Integer id = Integer.parseInt(username);
 
+        List<SelectedcourseVo> selectedcourseVos = selectedcourseService.findCourseByMark(id);
 
-        List<Selectedcourse> list = selectedcourseService.findStudentByMark(id);
+        mv.addObject("selectedCourseList",selectedcourseVos);
+
+        mv.setViewName("student/selectCourse");
+        return mv;
+    }
+
+    @RequestMapping("overCourse")
+    public ModelAndView overCourse(ModelAndView mv,
+                                       HttpSession session
+    ) {
+
+        String username = (String) session.getAttribute("username");
+
+        Integer id = Integer.parseInt(username);
+
+        List<SelectedcourseVo> list = selectedcourseService.findOverCourseByMark(id);
 
         mv.addObject("selectedCourseList",list);
 
-        mv.setViewName("student/selectCourse");
+        mv.setViewName("student/overCourse");
         return mv;
     }
 

@@ -1,9 +1,15 @@
 package com.fc.vo;
 
+import com.fc.entity.Course;
 import com.fc.entity.Selectedcourse;
 import com.fc.entity.Student;
+import lombok.Data;
 
+
+@Data
 public class SelectedcourseVo {
+
+    private Course couseCustom;
 
     private Student studentCustom;
 
@@ -31,16 +37,6 @@ public class SelectedcourseVo {
 
     public void setStudentid(Integer studentid) {
         this.studentid = studentid;
-    }
-
-    @Override
-    public String toString() {
-        return "SelectedcourseVo{" +
-                "studentCustom=" + studentCustom +
-                ", selected=" + selected +
-                ", over=" + over +
-                ", mark=" + mark +
-                '}';
     }
 
     public Integer getMark() {

@@ -7,15 +7,26 @@
     <result column="mark" jdbcType="INTEGER" property="mark" />
   </resultMap>
 
-  <select id="findStudentByMark" resultType="com.fc.entity.Selectedcourse" >
-    select * from educationalmanagementsystem.selectedcourse es
-        inner join educationalmanagementsystem.student et on  es.studentID = et.userID
-        inner join educationalmanagementsystem.course ec on es.courseID = ec.courseID
-        where es.mark IS NULL and et.userID = #{id}
+  <resultMap id="SelectedCourseVoMap" type="com.fc.vo.SelectedcourseVo">
+    <id column="courseID" jdbcType="INTEGER" property="couseCustom.courseid" />
+    <result column="courseName" jdbcType="VARCHAR" property="couseCustom.coursename" />
+    <result column="teacherID" jdbcType="INTEGER" property="couseCustom.teacherid" />
+    <result column="courseTime" jdbcType="VARCHAR" property="couseCustom.coursetime" />
+    <result column="classRoom" jdbcType="VARCHAR" property="couseCustom.classroom" />
+    <result column="courseWeek" jdbcType="INTEGER" property="couseCustom.courseweek" />
+    <result column="courseType" jdbcType="VARCHAR" property="couseCustom.coursetype" />
+    <result column="collegeID" jdbcType="INTEGER" property="couseCustom.collegeid" />
+    <result column="score" jdbcType="INTEGER" property="couseCustom.score" />
+    <result column="mark" jdbcType="INTEGER" property="mark"/>
+  </resultMap>
 
+  <select id="findCourseByMark" parameterType="java.lang.Integer" resultMap="SelectedCourseVoMap">
+    select c.* from selectedcourse sd inner join course c on sd.courseID = c.courseID where sd.studentID = #{id} and sd.mark Is NULL
   </select>
 
-
+  <select id="findOverCourseByMark" parameterType="java.lang.Integer" resultMap="SelectedCourseVoMap">
+    select c.*, sd.mark from selectedcourse sd inner join course c on sd.courseID = c.courseID where sd.studentID = #{id} and sd.mark IS NOT NULL
+  </select>
 
   <sql id="Example_Where_Clause">
     <where>

@@ -1,12 +1,15 @@
 package com.fc.service.impl;
 
 import com.fc.dao.SelectedcourseMapper;
+import com.fc.entity.Course;
 import com.fc.entity.Selectedcourse;
 import com.fc.entity.SelectedcourseExample;
 import com.fc.service.SelectedcourseService;
+import com.fc.vo.SelectedcourseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,11 +31,6 @@ public class SelectedcourseServiceImpl implements SelectedcourseService {
         criteria.andStudentidEqualTo(studentid);
         selectedcourseMapper.updateByExampleSelective(selectedcourse,selectedcourseExample);
 
-    }
-
-    @Override
-    public List<Selectedcourse> findStudentByMark(Integer id) {
-        return selectedcourseMapper.findStudentByMark(id);
     }
 
     @Override
@@ -59,6 +57,17 @@ public class SelectedcourseServiceImpl implements SelectedcourseService {
         if (!selectedcourses.isEmpty()) {
             selectedcourseMapper.deleteByExample(selectedcourseExample);
         }
+    }
+
+    @Override
+    public List<SelectedcourseVo> findCourseByMark(Integer id) {
+
+        return selectedcourseMapper.findCourseByMark(id);
+    }
+
+    @Override
+    public List<SelectedcourseVo> findOverCourseByMark(Integer id) {
+        return selectedcourseMapper.findOverCourseByMark(id);
     }
 
 }

@@ -1,10 +1,12 @@
 package com.fc.dao;
 
+import com.fc.entity.Course;
 import com.fc.entity.Selectedcourse;
 import com.fc.entity.SelectedcourseExample;
 import java.util.List;
 
 import com.fc.entity.Student;
+import com.fc.vo.SelectedcourseVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -30,5 +32,7 @@ public interface SelectedcourseMapper {
     List<Selectedcourse> findStudentByMark(@Param("id") Integer id);
 
 
+    List<SelectedcourseVo> findCourseByMark(Integer id);
 
+    List<SelectedcourseVo> findOverCourseByMark(Integer id);
 }
