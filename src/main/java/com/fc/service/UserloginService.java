@@ -15,4 +15,10 @@ public interface UserloginService {
 
     // 修改用户操作
     void update(Userlogin user);
+
+    // 添加用户操作
+    void add(Userlogin user);
+
+    // 删除用户操作
+    void delete(Integer id);
 }

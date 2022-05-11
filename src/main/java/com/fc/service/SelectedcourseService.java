@@ -12,4 +12,7 @@ public interface SelectedcourseService {
 
     // 根据课程id查询
     List<Selectedcourse> findCourseById(Integer id);
+
+    // 删除选、修课信息
+    void delete(Integer id);
 }

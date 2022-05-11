@@ -58,4 +58,22 @@ public class UserloginServiceImpl implements UserloginService {
     public void update(Userlogin user) {
         userloginMapper.updateByPrimaryKeySelective(user);
     }
+
+    @Override
+    public void add(Userlogin user) {
+        userloginMapper.insertSelective(user);
+    }
+
+    @Override
+    public void delete(Integer id) {
+        String userName = String.valueOf(id);
+
+        UserloginExample userloginExample = new UserloginExample();
+
+        UserloginExample.Criteria criteria = userloginExample.createCriteria();
+
+        criteria.andUsernameEqualTo(userName);
+
+        userloginMapper.deleteByExample(userloginExample);
+    }
 }

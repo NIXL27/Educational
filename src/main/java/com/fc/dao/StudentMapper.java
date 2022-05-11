@@ -34,4 +34,5 @@ public interface StudentMapper {
 
     List<StudentVO> findAll();
 
+    List<StudentVO> findByKeyword(String name);
 }
