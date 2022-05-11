@@ -60,4 +60,9 @@ public class SelectedcourseServiceImpl implements SelectedcourseService {
             selectedcourseMapper.deleteByExample(selectedcourseExample);
         }
     }
+
+    @Override
+    public List<Selectedcourse> findStudentByMark(Integer id) {
+        return selectedcourseMapper.findStudentByMark(id);
+    }
 }

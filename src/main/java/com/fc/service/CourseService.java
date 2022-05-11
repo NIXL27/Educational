@@ -28,4 +28,5 @@ public interface CourseService {
 
     // 模糊查询课程
     List<Course> findCourseByKeyword(String findCourseByName, Integer page, Integer pageSize);
+    PageInfo<Course> findByName(Integer page, Integer pageSize, String findCourseByName);
 }
