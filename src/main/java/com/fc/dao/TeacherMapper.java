@@ -3,8 +3,11 @@ package com.fc.dao;
 import com.fc.entity.Teacher;
 import com.fc.entity.TeacherExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
 
 @Repository
 public interface TeacherMapper {

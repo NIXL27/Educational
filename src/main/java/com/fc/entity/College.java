@@ -1,5 +1,10 @@
 package com.fc.entity;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
+
+@Mapper
+
 public class College {
     private Integer collegeid;
 
