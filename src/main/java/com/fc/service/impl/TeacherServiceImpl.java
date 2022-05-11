@@ -8,6 +8,9 @@ import com.fc.entity.*;
 import com.fc.service.TeacherService;
 
 import com.fc.vo.SelectedcourseVo;
+import com.fc.vo.TeacherVO;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -65,5 +68,14 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public List<Teacher> findAll() {
         return teacherMapper.selectByExample(null);
+    }
+
+    @Override
+    public List<TeacherVO> findAllByPage(Integer page, Integer pageSize) {
+
+        PageHelper.startPage(page, pageSize);
+        List<TeacherVO> teachers = teacherMapper.findAllByPage();
+
+        return teachers;
     }
 }

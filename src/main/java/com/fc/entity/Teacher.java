@@ -1,7 +1,10 @@
 package com.fc.entity;
 
+import lombok.Data;
+
 import java.util.Date;
 
+@Data
 public class Teacher {
     private Integer userid;
 
