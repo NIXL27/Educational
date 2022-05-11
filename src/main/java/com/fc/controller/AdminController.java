@@ -194,127 +194,130 @@ public class AdminController {
 
     }
 
-//    //学号验证
-//    @RequestMapping("checkStudentId")
-//    @ResponseBody
-//    public Map<String, Object> checkStudentId(@RequestParam Integer id) {
-//        Map<String, Object> map = new HashMap<>();
-//        Student student = studentService.findByid(id);
-//
-//        if (student != null) {
-//            map.put("flag", false);
-//            map.put("errorMsg", "该学号已经存在，请重新输入！");
-//        } else {
-//            map.put("flag", true);
-//            map.put("errorMsg", "");
-//        }
-//
-//        return map;
-//    }
-//
-//    // 添加页面显示
-//    @GetMapping("addStudent")
-//    public ModelAndView addStudent(ModelAndView mv) {
-//
-//        List<College> list = collegeService.findAll();
-//
-//        mv.addObject("collegeList", list);
-//        mv.setViewName("admin/addStudent");
-//        return mv;
-//    }
-//
-//    // 添加学生操作
-//    @PostMapping("addStudent")
-//    public ModelAndView addStudent(Student student, ModelAndView mv) {
-//
-//        System.out.println(student);
-//
-//        // 验证学号
-//        Student checkStudentId = studentService.findByid(student.getUserid());
-//
-//        if (checkStudentId == null) {
-//            studentService.add(student);
-//            Userlogin user = new Userlogin();
-//            String username = String.valueOf(student.getUserid());
-//            user.setUsername(username);
-//            user.setPassword("123");
-//            user.setRole(2);
-//            loginService.add(user);
-//            mv.setViewName("redirect:/admin/showStudent");
-//        } else {
-//            mv.addObject("message", "学号重复");
-//            mv.setViewName("error");
-//        }
-//        return mv;
-//    }
-//
-//    // 修改页面显示
-//    @GetMapping("editStudent")
-//    public ModelAndView editStudent(@RequestParam Integer id, ModelAndView mv) {
-//
-//        if (id == null || id.equals("")) {
-//            mv.setViewName("redirect:/admin/showStudent");
-//        } else {
-//            Student student = studentService.findByid(id);
-//            List<College> list = collegeService.findAll();
-//
-//            mv.addObject("student", student);
-//            mv.addObject("collegeList", list);
-//
-//            mv.setViewName("admin/editStudent");
-//        }
-//
-//        return mv;
-//    }
-//
-//    // 修改学生信息操作
-//    @PostMapping("editStudent")
-//    public ModelAndView editStudent(Student student, ModelAndView mv) {
-//        studentService.update(student);
-//        mv.setViewName("redirect:/admin/showStudent");
-//
-//        return mv;
-//    }
-//
-//    // 删除学生操作
-//    @GetMapping("removeStudent")
-//    public ModelAndView removeStudent(@RequestParam Integer id, ModelAndView mv) {
-//        // 判断id是否为空
-//        if (id == null || id.equals("")) {
-//            mv.setViewName("redirect:/admin/showStudent");
-//            // 不为空，选课关联表删除对应选课记录，学生表删除此学生，用户表删除此用户
-//        } else {
-//            selectedcourseService.delete(id);
-//            studentService.delete(id);
-//            loginService.delete(id);
-//            mv.setViewName("redirect:/admin/showStudent");
-//
-//        }
-//        return mv;
-//    }
-//
-//    // 模糊查询关键字保存
-//    @RequestMapping("searchStudentName")
-//    public void searchStudentName(@RequestBody Student student, HttpSession session) {
-//        String username = student.getUsername();
-//        session.setAttribute("findStudentByName", username);
-//    }
-//
-//    // 学生搜索
-//    @RequestMapping("selectStudent")
-//    public ModelAndView selectStudent(@RequestParam(value = "page", required = true, defaultValue = "1") Integer page,
-//                                      @RequestParam(value = "pageSize", required = true, defaultValue = "4") Integer pageSize, HttpSession session, ModelAndView mv) {
-//
-//        String findStudentByName = (String) session.getAttribute("findStudentByName");
-//
-//        List<StudentVO> students = studentService.findStudentByKeyword(findStudentByName, page, pageSize);
-//
-//        PageInfo<StudentVO> selectStudentInfo = new PageInfo<>(students);
-//
-//        mv.addObject("selectStudentInfo", selectStudentInfo);
-//        mv.setViewName("admin/selectStudent");
-//        return mv;
-//    }
+    // 工号验证
+    @RequestMapping("checkTeacherId")
+    @ResponseBody
+    public Map<String, Object> checkTeacherId(@RequestParam Integer id) {
+        Map<String, Object> map = new HashMap<>();
+        Teacher teacher = teacherService.findByid(id);
+
+        if (teacher != null) {
+            map.put("flag", false);
+            map.put("errorMsg", "该工号已经存在，请重新输入！");
+        } else {
+            map.put("flag", true);
+            map.put("errorMsg", "");
+        }
+
+        return map;
+    }
+
+    // 添加页面显示
+    @GetMapping("addTeacher")
+    public ModelAndView addTeacher(ModelAndView mv) {
+
+        List<College> list = collegeService.findAll();
+
+        mv.addObject("collegeList", list);
+        mv.setViewName("admin/addTeacher");
+        return mv;
+    }
+
+    // 添加教师操作
+    @PostMapping("addTeacher")
+    public ModelAndView addTeacher(Teacher teacher, ModelAndView mv) {
+
+        // 验证工号
+        Teacher checkTeacherId = teacherService.findByid(teacher.getUserid());
+
+        if (checkTeacherId == null) {
+            teacherService.add(teacher);
+            Userlogin user = new Userlogin();
+            String username = String.valueOf(teacher.getUserid());
+            user.setUsername(username);
+            user.setPassword("123");
+            user.setRole(1);
+            loginService.add(user);
+            mv.setViewName("redirect:/admin/showTeacher");
+        } else {
+            mv.addObject("message", "工号重复");
+            mv.setViewName("error");
+        }
+        return mv;
+    }
+
+    // 修改页面显示
+    @GetMapping("editTeacher")
+    public ModelAndView editTeacher(@RequestParam Integer id, ModelAndView mv) {
+
+        if (id == null || id.equals("")) {
+            mv.setViewName("redirect:/admin/showTeacher");
+        } else {
+            Teacher teacher = teacherService.findByid(id);
+            List<College> list = collegeService.findAll();
+
+            mv.addObject("teacher", teacher);
+            mv.addObject("collegeList", list);
+
+            mv.setViewName("admin/editTeacher");
+        }
+
+        return mv;
+    }
+
+    // 修改教师信息操作
+    @PostMapping("editTeacher")
+    public ModelAndView editTeacher(Teacher teacher, ModelAndView mv) {
+        teacherService.update(teacher);
+        mv.setViewName("redirect:/admin/showTeacher");
+
+        return mv;
+    }
+
+    // 删除教师操作
+    @GetMapping("removeTeacher")
+    public ModelAndView removeTeacher(@RequestParam Integer id, ModelAndView mv) {
+        // 判断id是否为空
+        if (id == null || id.equals("")) {
+            mv.setViewName("redirect:/admin/showTeacher");
+            // 不为空，选课关联表删除对应选课记录，学生表删除此学生，用户表删除此用户
+        } else {
+            List<Course> courses = courseService.findByTeacherId(id);
+
+            if (!courses.isEmpty()){
+                mv.addObject("message","该教师有在教课程，请联系管理员进行调课");
+                mv.setViewName("error");
+            }else {
+                teacherService.delete(id);
+                loginService.delete(id);
+                mv.setViewName("redirect:/admin/showStudent");
+            }
+        }
+        return mv;
+    }
+
+    // 模糊查询关键字保存
+    @RequestMapping("searchTeacherName")
+    public void searchTeacherName(@RequestBody Student student, HttpSession session) {
+        String username = student.getUsername();
+        session.setAttribute("findTeacherByName", username);
+    }
+
+    // 教师搜索
+    @RequestMapping("selectTeacher")
+    public ModelAndView selectTeacher(@RequestParam(value = "page", required = true, defaultValue = "1") Integer page,
+                                      @RequestParam(value = "pageSize", required = true, defaultValue = "4") Integer pageSize, HttpSession session, ModelAndView mv) {
+
+        String findTeacherByName = (String) session.getAttribute("findTeacherByName");
+
+        List<TeacherVO> teachers = teacherService.findStudentByKeyword(findTeacherByName, page, pageSize);
+
+        PageInfo<TeacherVO> selectTeacherInfo = new PageInfo<>(teachers);
+
+        mv.addObject("selectTeacherInfo", selectTeacherInfo);
+        mv.setViewName("admin/selectTeacher");
+        return mv;
+    }
 
 
 

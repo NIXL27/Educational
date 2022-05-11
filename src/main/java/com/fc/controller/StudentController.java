@@ -25,7 +25,7 @@ public class StudentController {
     private SelectedcourseService selectedcourseService;
 
 
-    @GetMapping("showCourse")
+    @RequestMapping("showCourse")
     public ModelAndView page(ModelAndView mv,
                                        @RequestParam(defaultValue = "1") Integer page,
                                        @RequestParam(defaultValue = "4") Integer pageSize
@@ -79,7 +79,9 @@ public class StudentController {
                                      @RequestParam(defaultValue = "4") Integer pageSize) {
         String findCourseByName = (String)session.getAttribute("findCourseByName");
 
-        PageInfo<Course> searchCourseInfo =  courseService.findByName(page,pageSize,findCourseByName);
+        List<Course> courseByKeyword = courseService.findCourseByKeyword(findCourseByName, page, pageSize);
+
+        PageInfo<Course> searchCourseInfo = new PageInfo<>(courseByKeyword);
 
         mv.addObject("searchCourseInfo",searchCourseInfo);
 

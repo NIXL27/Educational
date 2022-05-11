@@ -34,4 +34,6 @@ public interface TeacherMapper {
     int updateByPrimaryKey(Teacher record);
 
     List<TeacherVO> findAllByPage();
+
+    List<TeacherVO> findByKeyword(String name);
 }

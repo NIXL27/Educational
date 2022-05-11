@@ -37,21 +37,14 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public PageInfo<Course> findByName(Integer page, Integer pageSize, String findCourseByName) {
+    public List<Course> findByTeacherId(Integer id) {
+        CourseExample courseExample = new CourseExample();
 
-        CourseExample example = new CourseExample();
+        CourseExample.Criteria criteria = courseExample.createCriteria();
 
-        CourseExample.Criteria criteria = example.createCriteria();
+        criteria.andTeacheridEqualTo(id);
 
-        criteria.andCoursenameLike("%" + findCourseByName + "%");
-
-        //开启分页
-        PageHelper.startPage(page,pageSize);
-
-        List<Course> list = courseMapper.selectByExample(example);
-
-
-        return new PageInfo<>(list);
+        return courseMapper.selectByExample(courseExample);
     }
 
 

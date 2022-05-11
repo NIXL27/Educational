@@ -17,4 +17,14 @@ public interface TeacherService {
     List<Teacher> findAll();
 
     List<TeacherVO> findAllByPage(Integer page, Integer pageSize);
+
+    Teacher findByid(Integer id);
+
+    void add(Teacher teacher);
+
+    void update(Teacher teacher);
+
+    void delete(Integer id);
+
+    List<TeacherVO> findStudentByKeyword(String findTeacherByName, Integer page, Integer pageSize);
 }

@@ -81,6 +81,10 @@
   <select id="findAllByPage" resultMap="TeacherMapper">
     select t.*, c.collegeName from teacher t inner join college c on t.collegeID = c.collegeID
   </select>
+
+  <select id="findByKeyword" parameterType="java.lang.String" resultMap="TeacherMapper">
+    select t.*, c.collegeName from teacher t inner join college c on t.collegeID = c.collegeID where t.userName like #{name}
+  </select>
   <select id="selectByExample" parameterType="com.fc.entity.TeacherExample" resultMap="BaseResultMap">
     select
     <if test="distinct">

@@ -78,4 +78,34 @@ public class TeacherServiceImpl implements TeacherService {
 
         return teachers;
     }
+
+    @Override
+    public Teacher findByid(Integer id) {
+        return teacherMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public void add(Teacher teacher) {
+        teacherMapper.insertSelective(teacher);
+    }
+
+    @Override
+    public void update(Teacher teacher) {
+        teacherMapper.updateByPrimaryKeySelective(teacher);
+    }
+
+    @Override
+    public void delete(Integer id) {
+        teacherMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public List<TeacherVO> findStudentByKeyword(String findTeacherByName, Integer page, Integer pageSize) {
+        String name = "%" + findTeacherByName + "%";
+
+        PageHelper.startPage(page,pageSize);
+        List<TeacherVO> teachers = teacherMapper.findByKeyword(name);
+
+        return teachers;
+    }
 }
