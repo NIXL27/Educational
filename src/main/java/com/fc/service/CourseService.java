@@ -10,4 +10,5 @@ public interface CourseService {
     PageInfo<Course> page(Integer page, Integer pageSize);
 
 
+    PageInfo<Course> findByName(Integer page, Integer pageSize, String findCourseByName);
 }

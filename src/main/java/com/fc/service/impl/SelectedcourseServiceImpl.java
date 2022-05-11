@@ -8,6 +8,8 @@ import com.fc.vo.SelectedcourseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SelectedcourseServiceImpl implements SelectedcourseService {
     @Autowired
@@ -24,5 +26,10 @@ public class SelectedcourseServiceImpl implements SelectedcourseService {
         criteria.andCourseidEqualTo(courseid);
         criteria.andStudentidEqualTo(studentid);
         selectedcourseMapper.updateByExampleSelective(selectedcourse,selectedcourseExample);
+    }
+
+    @Override
+    public List<Selectedcourse> findStudentByMark(Integer id) {
+        return selectedcourseMapper.findStudentByMark(id);
     }
 }

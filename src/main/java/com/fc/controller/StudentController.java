@@ -2,15 +2,14 @@ package com.fc.controller;
 
 import com.fc.entity.Course;
 import com.fc.entity.Selectedcourse;
+import com.fc.entity.Student;
 import com.fc.service.CourseService;
 import com.fc.service.SelectedcourseService;
 import com.github.pagehelper.PageInfo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.security.auth.Subject;
@@ -59,4 +58,33 @@ public class StudentController {
         mv.setViewName("student/selectCourse");
         return mv;
     }
+
+
+    //课程保存
+    @PostMapping("searchCourseName")
+    public void searchCourseName(@RequestBody Student student,
+                                 HttpSession session) {
+        String coursename = student.getUsername();
+
+        session.setAttribute("findCourseByName",coursename);
+
+    }
+
+    //搜索课程
+    @PostMapping("searchCourse")
+    public ModelAndView searchCourse(ModelAndView mv,
+                                     HttpSession session,
+                                     String findByName,
+                                     @RequestParam(defaultValue = "1") Integer page,
+                                     @RequestParam(defaultValue = "4") Integer pageSize) {
+        String findCourseByName = (String)session.getAttribute("findCourseByName");
+
+        PageInfo<Course> searchCourseInfo =  courseService.findByName(page,pageSize,findCourseByName);
+
+        mv.addObject("searchCourseInfo",searchCourseInfo);
+
+        mv.setViewName("student/searchCourse");
+        return mv;
+    }
+
 }
