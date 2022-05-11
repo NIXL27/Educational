@@ -77,6 +77,10 @@
   <select id="findAll" resultMap="StudentMap">
     select s.*, c.collegeName from student s inner join college c on s.collegeID = c.collegeID
   </select>
+
+  <select id="findByKeyword" parameterType="java.lang.String" resultMap="StudentMap">
+    select s.*, c.collegeName from student s inner join college c on s.collegeID = c.collegeID where s.userName like #{name}
+  </select>
   <select id="selectByExample" parameterType="com.fc.entity.StudentExample" resultMap="BaseResultMap">
     select
     <if test="distinct">

@@ -45,4 +45,19 @@ public class SelectedcourseServiceImpl implements SelectedcourseService {
 
         return selectedcourseMapper.selectByExample(selectedcourseExample);
     }
+
+    @Override
+    public void delete(Integer id) {
+        SelectedcourseExample selectedcourseExample = new SelectedcourseExample();
+
+        SelectedcourseExample.Criteria criteria = selectedcourseExample.createCriteria();
+
+        criteria.andStudentidEqualTo(id);
+
+        List<Selectedcourse> selectedcourses = selectedcourseMapper.selectByExample(selectedcourseExample);
+
+        if (!selectedcourses.isEmpty()) {
+            selectedcourseMapper.deleteByExample(selectedcourseExample);
+        }
+    }
 }
