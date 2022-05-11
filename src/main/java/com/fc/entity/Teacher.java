@@ -1,7 +1,11 @@
 package com.fc.entity;
 
+import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
+@Data
 public class Teacher {
     private Integer userid;
 
@@ -9,12 +13,14 @@ public class Teacher {
 
     private String sex;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthyear;
 
     private String degree;
 
     private String title;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date grade;
 
     private Integer collegeid;

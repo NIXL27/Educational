@@ -8,6 +8,9 @@ import com.fc.entity.*;
 import com.fc.service.TeacherService;
 
 import com.fc.vo.SelectedcourseVo;
+import com.fc.vo.TeacherVO;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -65,5 +68,44 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public List<Teacher> findAll() {
         return teacherMapper.selectByExample(null);
+    }
+
+    @Override
+    public List<TeacherVO> findAllByPage(Integer page, Integer pageSize) {
+
+        PageHelper.startPage(page, pageSize);
+        List<TeacherVO> teachers = teacherMapper.findAllByPage();
+
+        return teachers;
+    }
+
+    @Override
+    public Teacher findByid(Integer id) {
+        return teacherMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public void add(Teacher teacher) {
+        teacherMapper.insertSelective(teacher);
+    }
+
+    @Override
+    public void update(Teacher teacher) {
+        teacherMapper.updateByPrimaryKeySelective(teacher);
+    }
+
+    @Override
+    public void delete(Integer id) {
+        teacherMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public List<TeacherVO> findStudentByKeyword(String findTeacherByName, Integer page, Integer pageSize) {
+        String name = "%" + findTeacherByName + "%";
+
+        PageHelper.startPage(page,pageSize);
+        List<TeacherVO> teachers = teacherMapper.findByKeyword(name);
+
+        return teachers;
     }
 }
