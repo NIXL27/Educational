@@ -21,12 +21,9 @@
   </resultMap>
 
   <select id="findCourseByMark" parameterType="java.lang.Integer" resultMap="SelectedCourseVoMap">
-    select c.* from selectedcourse sd inner join course c on sd.courseID = c.courseID where sd.studentID = #{id} and sd.mark Is NULL
+    select c.*,sd.mark from selectedcourse sd inner join course c on sd.courseID = c.courseID where sd.studentID = #{id}
   </select>
 
-  <select id="findOverCourseByMark" parameterType="java.lang.Integer" resultMap="SelectedCourseVoMap">
-    select c.*, sd.mark from selectedcourse sd inner join course c on sd.courseID = c.courseID where sd.studentID = #{id} and sd.mark IS NOT NULL
-  </select>
 
   <sql id="Example_Where_Clause">
     <where>

@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fc.dao.CourseMapper">
-
-<!--&lt;!&ndash;分页查询所有课程&ndash;&gt;-->
-<!--<select id="findByPageAndCourseId" resultType="com.fc.entity.Course">-->
-<!--  select *-->
-<!--  from educationalmanagementsystem.college ec-->
-<!--  inner join educationalmanagementsystem.course ee on ec.collegeID = ee.collegeID-->
-<!--  inner join educationalmanagementsystem.teacher et on ec.collegeID = et.collegeID-->
-<!--  where ec.collegeID = #{collegeID}-->
-<!--</select>-->
-
-
   <resultMap id="BaseResultMap" type="com.fc.entity.Course">
     <id column="courseID" jdbcType="INTEGER" property="courseid" />
     <result column="courseName" jdbcType="VARCHAR" property="coursename" />

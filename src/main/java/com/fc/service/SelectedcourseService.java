@@ -15,5 +15,9 @@ public interface SelectedcourseService {
 
     List<SelectedcourseVo> findCourseByMark(Integer id);
 
-    List<SelectedcourseVo> findOverCourseByMark(Integer id);
+    List<Selectedcourse> findOne(Integer id, Integer studentId);
+
+    void add(Integer id, Integer studentId);
+
+    void deleteByStudent(Integer id, Integer studentId);
 }

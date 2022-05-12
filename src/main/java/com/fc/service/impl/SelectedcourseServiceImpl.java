@@ -9,7 +9,6 @@ import com.fc.vo.SelectedcourseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -61,13 +60,52 @@ public class SelectedcourseServiceImpl implements SelectedcourseService {
 
     @Override
     public List<SelectedcourseVo> findCourseByMark(Integer id) {
+        List<SelectedcourseVo> selectedcourseVos = selectedcourseMapper.findCourseByMark(id);
 
-        return selectedcourseMapper.findCourseByMark(id);
+        for (SelectedcourseVo selectedcourseVo : selectedcourseVos) {
+            selectedcourseVo.setCourseid(selectedcourseVo.getCouseCustom().getCourseid());
+            if (selectedcourseVo.getMark() == null) {
+                selectedcourseVo.setOver(false);
+            }else {
+                selectedcourseVo.setOver(true);
+            }
+        }
+
+        return selectedcourseVos;
     }
 
     @Override
-    public List<SelectedcourseVo> findOverCourseByMark(Integer id) {
-        return selectedcourseMapper.findOverCourseByMark(id);
+    public List<Selectedcourse> findOne(Integer id, Integer studentId) {
+        SelectedcourseExample selectedcourseExample = new SelectedcourseExample();
+
+        SelectedcourseExample.Criteria criteria = selectedcourseExample.createCriteria();
+
+        criteria.andStudentidEqualTo(studentId);
+        criteria.andCourseidEqualTo(id);
+
+        return selectedcourseMapper.selectByExample(selectedcourseExample);
+    }
+
+    @Override
+    public void add(Integer id, Integer studentId) {
+        Selectedcourse selectedcourse = new Selectedcourse();
+
+        selectedcourse.setStudentid(studentId);
+        selectedcourse.setCourseid(id);
+
+        selectedcourseMapper.insertSelective(selectedcourse);
+    }
+
+    @Override
+    public void deleteByStudent(Integer id, Integer studentId) {
+        SelectedcourseExample selectedcourseExample = new SelectedcourseExample();
+
+        SelectedcourseExample.Criteria criteria = selectedcourseExample.createCriteria();
+
+        criteria.andStudentidEqualTo(studentId);
+        criteria.andCourseidEqualTo(id);
+
+        selectedcourseMapper.deleteByExample(selectedcourseExample);
     }
 
 }

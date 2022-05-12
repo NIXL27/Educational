@@ -15,7 +15,7 @@ public class SelectedcourseVo {
 
     private Selectedcourse selected;
     //判断该学生是否已经完成该课程
-    private Boolean over = false;
+    private Boolean over;
 
     private Integer mark;
 

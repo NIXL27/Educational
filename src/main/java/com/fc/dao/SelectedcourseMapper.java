@@ -28,11 +28,5 @@ public interface SelectedcourseMapper {
 
     List<Student> selectStudentByCourse(@Param("id") Integer id);
 
-    //连表查询
-    List<Selectedcourse> findStudentByMark(@Param("id") Integer id);
-
-
     List<SelectedcourseVo> findCourseByMark(Integer id);
-
-    List<SelectedcourseVo> findOverCourseByMark(Integer id);
 }
